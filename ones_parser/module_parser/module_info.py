@@ -1,5 +1,10 @@
-from .base_info import base_info
 from enum import Enum
+
+
+class BaseInfo:
+    def __init__(self, name=''):
+        self.name = name
+        self.description = ''
 
 
 class ModuleInfo:
@@ -8,6 +13,7 @@ class ModuleInfo:
         self.name = ''
         self.methods = []
         self.vars = []
+        self.file_name = None
 
 
 class MethodType(Enum):
@@ -15,13 +21,17 @@ class MethodType(Enum):
     FUNCTION = 1
     PROCEDURE = 2
 
-class MethodInfo(base_info):
+
+class MethodInfo(BaseInfo):
 
     def __init__(self):
         super().__init__()
 
+        self.context = None
+        self.export = False
         self.type = MethodType.UNKNOWN
-        self.parameters = ''
+        self.parameters = []
+        self.parameters_str = ''
         self.export = False
         self.body = ''
 
@@ -35,3 +45,19 @@ class MethodInfo(base_info):
 
     def __str__(self):
         return self.type.name + ' ' + self.name
+
+
+class VariableInfo(BaseInfo):
+    def __init__(self):
+        super().__init__()
+
+        self.type = None
+        self.export = False
+
+
+class ParameterInfo(BaseInfo):
+    def __init__(self, name, default_value):
+        super().__init__(name)
+
+        self.type = None
+        self.default_value = default_value

@@ -1,22 +1,23 @@
+# -*- coding: utf-8 -*-
 
+import gettext
+import os
 
+import ones_parser.xml_info_parser.parse_object_info as xmlParser
 from ReST_generator import generator
 from ones_parser.parser import Parser
 
-# print(parser.object_info(r'F:\tmp\1c_export_modules\Catalogs\Справочник1.xml'))
-# generator.build(r'F:\tmp\1c_export_modules')
+xmlParser.parse(r'F:\tmp\1c_export_modules\Catalogs\Справочник1.xml')
 
-parser = Parser(r'F:\tmp\1c_export_modules')
-conf = parser.read_structure()
+lang_dir = os.path.abspath(os.path.join(os.curdir, 'lang'))
+os.environ['LANGUAGE'] = 'ru_RU'
+gettext.install('messages', lang_dir)
+
+source_code_directory = r'F:\tmp\1c_export_modules'
+print(_('Parse config files'))
+parser = Parser(source_code_directory)
+cfg = parser.read_structure()
 parser.read_objects_info()
 
-with open(r'F:\tmp\1c-doc\methods.rst', 'w', encoding='utf-8') as stream:
-    for module_info in parser.read_modules_iter():
-
-        if module_info.methods.__len__() == 0:
-            continue
-        generator.write_header(stream, module_info.name)
-        for method in module_info.methods:
-            generator.write_method(stream, method)
-
-print(conf)
+print(_('Build documentation'))
+generator.build(parser, r'F:\tmp\1c-doc')

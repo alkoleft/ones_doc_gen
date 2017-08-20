@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: onse_doc_gen\n"
+"POT-Creation-Date: 2017-08-20 15:58+0300\n"
+"PO-Revision-Date: 2017-08-20 15:59+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.3\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ReST_generator/generator.py:137
+msgid "Attributes"
+msgstr "Реквизиты"
+
+#: ReST_generator/generator.py:137
+msgid "Name"
+msgstr "Имя"
+
+#: ReST_generator/generator.py:137
+msgid "Synonym"
+msgstr "Синовим"
+
+#: build/html/_static/doctools.js:167
+msgid "Permalink to this headline"
+msgstr ""
+
+#: build/html/_static/doctools.js:173
+msgid "Permalink to this definition"
+msgstr ""
+
+#: build/html/_static/doctools.js:206
+msgid "Hide Search Matches"
+msgstr ""
+
+#: build/html/_static/searchtools.js:221
+msgid "Searching"
+msgstr ""
+
+#: build/html/_static/searchtools.js:226
+msgid "Preparing search..."
+msgstr ""
+
+#: build/html/_static/searchtools.js:387
+msgid "Search Results"
+msgstr ""
+
+#: build/html/_static/searchtools.js:389
+msgid ""
+"Your search did not match any documents. Please make sure that all words are "
+"spelled correctly and that you've selected enough categories."
+msgstr ""
+
+#: build/html/_static/searchtools.js:391
+#, javascript-format
+msgid "Search finished, found %s page(s) matching the search query."
+msgstr ""
+
+#: build/html/_static/searchtools.js:444
+msgid ", in "
+msgstr ""
+
+#: build/html/_static/sidebar.js:77
+msgid "Expand sidebar"
+msgstr ""
+
+#: build/html/_static/sidebar.js:90 build/html/_static/sidebar.js:118
+msgid "Collapse sidebar"
+msgstr ""
+
+#: main.py:17
+msgid "Parse config files"
+msgstr "Анализ файлов конфигурации"
+
+#: main.py:22
+msgid "Build documentation"
+msgstr "Построение документации"
+
+#~ msgid "Реквизиты"
+#~ msgstr "Attributes"
+
+#~ msgid "Имя"
+#~ msgstr "Name"

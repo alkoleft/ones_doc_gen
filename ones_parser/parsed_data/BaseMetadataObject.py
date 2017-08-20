@@ -4,6 +4,8 @@ class BaseMetadataObject:
         self.name = name
         self.synonym = ''
         self.collectionName = ''
+        self.properties = None
+        self.modules = []
 
 
 class TableMetaObject(BaseMetadataObject):

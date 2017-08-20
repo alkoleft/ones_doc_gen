@@ -28,7 +28,12 @@ def get_obj_file(source_code_directory, obj):
 
 
 def find_modules(path):
-
-    return [os.path.join(path, file) for file in os.listdir(path) if file.endswith('.bsl')] \
+    return [file for file in os.listdir(path) if file.endswith('.bsl')] \
         if os.path.exists(path) \
         else []
+
+
+def create_if_not_exists(path):
+    if not os.path.exists(path):
+        create_if_not_exists(os.path.dirname(path))
+        os.mkdir(path)
