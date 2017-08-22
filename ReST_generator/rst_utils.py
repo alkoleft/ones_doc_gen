@@ -4,42 +4,49 @@ from ones_parser import utils
 
 
 def write_header(stream: object, text: str):
-    stream.write('\n%s\n%s\n%s\n\n' % (
-        '#' * text.__len__(),
-        text,
-        '#' * text.__len__())
-                 )
-
-
-def write_toctree(stream, items) -> None:
     stream.write(
-        '''
-        
-        .. toctree::
-           :maxdepth: 2
-        
-        ''')
+'''
+%s
+%s
+%s
+
+''' % (
+    '#' * text.__len__(),
+    text,
+    '#' * text.__len__())
+    )
+
+
+def write_toctree(stream, items, without_index = False) -> None:
+    stream.write(
+'''
+
+.. toctree::
+   :maxdepth: 2
+
+'''
+    )
 
     for item in items:
-        stream.write('   %s\n' % item)
+        stream.write(('   %s\n' if without_index else '   %s/index\n') % item)
 
 
 def write_properties(stream, properties):
     if not properties or len(properties) == 0:
         return
-    write_table_header(stream, 'Значения свойств', '"Свойство", "Значение"', '10, 30')
+    write_table_header(stream, _('Properties'), '"%s", "%s"' % (_('Property'), _('Value')), '10, 30')
 
     for key in properties:
-        stream.write('   %s, %s\n' % (key, properties[key]))
+        stream.write('   %s, %s\n' % (_(key), properties[key]))
 
 
 def write_method(stream, method_info):
     stream.write(
-        '''
-        
-        .. function:: %s(%s)
-        
-        ''' % (method_info.name, method_info.parameters_str)
+'''
+
+.. function:: %s(%s)
+
+''' % (method_info.name, method_info.parameters_str)
     )
 
     flags = []
@@ -100,19 +107,3 @@ def write_table_header(stream, caption, headers, widths):
 
 ''' % (caption, headers, widths))
 
-
-def write_modules(parser, output):
-    utils.create_if_not_exists(output)
-
-    for module_info in parser.read_modules_info_iter():
-
-        output_path = os.path.join(output, module_info.name.replace('.', os.path.sep))
-        utils.create_if_not_exists(output_path)
-
-        file_name = output_path + module_info.file_name + '.rst'
-        with open(file_name, 'w', encoding='utf-8') as stream:
-
-            write_header(stream, module_info.name)
-            print(file_name)
-            for method in module_info.methods:
-                write_method(stream, method)

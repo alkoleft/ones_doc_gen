@@ -8,6 +8,7 @@ from . import utils
 
 
 class Parser:
+
     def parse_module(self, module_info, file_name):
         with open(file_name, 'r', encoding='utf-8') as stream:
             self.parse_stream(module_info, stream)

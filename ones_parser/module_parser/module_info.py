@@ -10,10 +10,10 @@ class BaseInfo:
 class ModuleInfo:
 
     def __init__(self):
+        self.owner = None
         self.name = ''
         self.methods = []
         self.vars = []
-        self.file_name = None
 
 
 class MethodType(Enum):

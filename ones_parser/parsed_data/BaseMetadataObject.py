@@ -1,11 +1,21 @@
+import os
+
+
 class BaseMetadataObject:
 
     def __init__(self, name = ''):
+        self.owner = None
         self.name = name
         self.synonym = ''
-        self.collectionName = ''
+        self.typeName = ''
         self.properties = None
         self.modules = []
+
+    def get_data_path(self):
+        if self.owner is None:
+            return self.data_path if hasattr(self, 'data_path') else None
+        else:
+            return os.path.join(self.owner.get_data_path(), self.name)
 
 
 class TableMetaObject(BaseMetadataObject):
@@ -16,51 +26,15 @@ class TableMetaObject(BaseMetadataObject):
         self.properties = []
 
 
-def fabric(type):
-    if type in [
-        'AccountingRegisters'
-        , 'AccumulationRegisters'
-        , 'BusinessProcesses'
-        , 'CalculationRegisters'
-        , 'Catalogs'
-        , 'ChartsOfAccounts'
-        , 'ChartsOfCalculationTypes'
-        , 'ChartsOfCharacteristicTypes'
-        , 'CommandGroups'
-        , 'CommonAttributes'
-        , 'CommonCommands'
-        , 'CommonForms'
-        , 'CommonModules'
-        , 'CommonPictures'
-        , 'CommonTemplates'
-        , 'Constants'
-        , 'DataProcessors'
-        , 'DefinedTypes'
-        , 'DocumentJournals'
-        , 'DocumentNumerators'
-        , 'Documents'
-        , 'Enums'
-        , 'EventSubscriptions'
-        , 'ExchangePlans'
-        , 'ExternalDataSources'
-        , 'FilterCriteria'
-        , 'FunctionalOptions'
-        , 'FunctionalOptionsParameters'
-        , 'HTTPServices'
-        , 'InformationRegisters'
-        , 'Interfaces'
-        , 'Languages'
-        , 'Reports'
-        , 'Roles'
-        , 'ScheduledJobs'
-        , 'Sequences'
-        , 'SessionParameters'
-        , 'SettingsStorages'
-        , 'StyleItems'
-        , 'Styles'
-        , 'Subsystems'
-        , 'Tasks'
-        , 'WebServices'
-        , 'XDTOPackages']:
-        return TableMetaObject()
+class MetadataCollection(list):
 
+    def __init__(self, name =''):
+        list.__init__(self)
+        self.name = name
+        self.owner = None
+
+    def get_data_path(self):
+        if self.owner is None:
+            return self.data_path if hasattr(self, 'data_path') else None
+        else:
+            return os.path.join(self.owner.get_data_path(), self.name)

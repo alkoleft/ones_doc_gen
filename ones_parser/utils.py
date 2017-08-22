@@ -20,11 +20,11 @@ def find_sub_objects(sub_directory):
 
 
 def get_obj_directory(source_code_directory, obj):
-    return os.path.join(source_code_directory, obj.collectionName, obj.name)
+    return os.path.join(source_code_directory, obj.typeName, obj.name)
 
 
 def get_obj_file(source_code_directory, obj):
-    return os.path.join(source_code_directory, obj.collectionName, obj.name + '.xml')
+    return os.path.join(source_code_directory, obj.typeName, obj.name + '.xml')
 
 
 def find_modules(path):

@@ -1,0 +1,28 @@
+# Список доступных свойств, для автопоиска переводчиком
+_('name')
+_('synonym')
+_('comment')
+_('hierarchical')
+_('hierarchytype')
+_('limitlevelcount')
+_('levelcount')
+_('foldersontop')
+_('usestandardcommands')
+_('owners')
+_('subordinationuse')
+_('codelength')
+_('descriptionlength')
+_('codetype')
+_('codeallowedlength')
+_('codeseries')
+_('checkunique')
+
+# Список достпных типов модулей
+
+_('ObjectModule')
+_('ManagerModule')
+_('RecordSetModule')
+_('ExternalConnectionModule')
+_('ManagedApplicationModule')
+_('OrdinaryApplicationModule')
+_('SessionModule')

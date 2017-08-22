@@ -7,8 +7,6 @@ import ones_parser.xml_info_parser.parse_object_info as xmlParser
 from ReST_generator import generator
 from ones_parser.parser import Parser
 
-xmlParser.parse(r'F:\tmp\1c_export_modules\Catalogs\Справочник1.xml')
-
 lang_dir = os.path.abspath(os.path.join(os.curdir, 'lang'))
 os.environ['LANGUAGE'] = 'ru_RU'
 gettext.install('messages', lang_dir)

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: onse_doc_gen\n"
-"POT-Creation-Date: 2017-08-20 15:58+0300\n"
-"PO-Revision-Date: 2017-08-20 15:59+0300\n"
+"POT-Creation-Date: 2017-08-20 18:24+0300\n"
+"PO-Revision-Date: 2017-08-20 18:26+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -14,15 +14,27 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: ReST_generator/generator.py:137
+#: ReST_generator/rst_utils.py:37
+msgid "Properties"
+msgstr "Свойства"
+
+#: ReST_generator/rst_utils.py:37
+msgid "Property"
+msgstr "Свойство"
+
+#: ReST_generator/rst_utils.py:37
+msgid "Value"
+msgstr "Значение"
+
+#: ReST_generator/rst_utils.py:95
 msgid "Attributes"
 msgstr "Реквизиты"
 
-#: ReST_generator/generator.py:137
+#: ReST_generator/rst_utils.py:95
 msgid "Name"
 msgstr "Имя"
 
-#: ReST_generator/generator.py:137
+#: ReST_generator/rst_utils.py:95
 msgid "Synonym"
 msgstr "Синовим"
 
@@ -73,13 +85,111 @@ msgstr ""
 msgid "Collapse sidebar"
 msgstr ""
 
-#: main.py:17
+#: main.py:15
 msgid "Parse config files"
 msgstr "Анализ файлов конфигурации"
 
-#: main.py:22
+#: main.py:20
 msgid "Build documentation"
 msgstr "Построение документации"
+
+#: ones_parser/xml_info_parser/available_properies.py:2
+msgid "name"
+msgstr "Имя"
+
+#: ones_parser/xml_info_parser/available_properies.py:3
+#, fuzzy
+#| msgid "Synonym"
+msgid "synonym"
+msgstr "Синовим"
+
+#: ones_parser/xml_info_parser/available_properies.py:4
+msgid "comment"
+msgstr "Комментарий"
+
+#: ones_parser/xml_info_parser/available_properies.py:5
+msgid "hierarchical"
+msgstr "Иерархический"
+
+#: ones_parser/xml_info_parser/available_properies.py:6
+msgid "hierarchytype"
+msgstr "Тип иерархии"
+
+#: ones_parser/xml_info_parser/available_properies.py:7
+msgid "limitlevelcount"
+msgstr "Ограничение количества уровней иерархии"
+
+#: ones_parser/xml_info_parser/available_properies.py:8
+msgid "levelcount"
+msgstr "Количество уровней иерархии"
+
+#: ones_parser/xml_info_parser/available_properies.py:9
+msgid "foldersontop"
+msgstr "Размещать группы сверху"
+
+#: ones_parser/xml_info_parser/available_properies.py:10
+msgid "usestandardcommands"
+msgstr "Использовать стандартные команды"
+
+#: ones_parser/xml_info_parser/available_properies.py:11
+msgid "owners"
+msgstr "Владельцы"
+
+#: ones_parser/xml_info_parser/available_properies.py:12
+msgid "subordinationuse"
+msgstr "Использование подчинения"
+
+#: ones_parser/xml_info_parser/available_properies.py:13
+msgid "codelength"
+msgstr "Длина кода"
+
+#: ones_parser/xml_info_parser/available_properies.py:14
+msgid "descriptionlength"
+msgstr "Длина наименования"
+
+#: ones_parser/xml_info_parser/available_properies.py:15
+msgid "codetype"
+msgstr "Тип кода"
+
+#: ones_parser/xml_info_parser/available_properies.py:16
+msgid "codeallowedlength"
+msgstr "Допустимая дина кода"
+
+#: ones_parser/xml_info_parser/available_properies.py:17
+msgid "codeseries"
+msgstr "Серии кодов"
+
+#: ones_parser/xml_info_parser/available_properies.py:18
+msgid "checkunique"
+msgstr "Контроль уникальности"
+
+#: ones_parser/xml_info_parser/available_properies.py:22
+msgid "ObjectModule"
+msgstr "Модуль объекта"
+
+#: ones_parser/xml_info_parser/available_properies.py:23
+msgid "ManagerModule"
+msgstr "Модуль менеджера"
+
+#: ones_parser/xml_info_parser/available_properies.py:24
+msgid "RecordSetModule"
+msgstr "Модуль набора записей"
+
+#: ones_parser/xml_info_parser/available_properies.py:25
+msgid "ExternalConnectionModule"
+msgstr "Модуль внешнего соединения"
+
+#: ones_parser/xml_info_parser/available_properies.py:26
+msgid "ManagedApplicationModule"
+msgstr "Модуль управляемого соединения"
+
+#: ones_parser/xml_info_parser/available_properies.py:27
+msgid "OrdinaryApplicationModule"
+msgstr "Модуль обычного приложения"
+
+#: ones_parser/xml_info_parser/available_properies.py:28
+msgid "SessionModule"
+msgstr "Модель сеанса"
 
 #~ msgid "Реквизиты"
 #~ msgstr "Attributes"

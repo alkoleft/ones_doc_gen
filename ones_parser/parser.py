@@ -4,14 +4,21 @@ from ones_parser.module_parser.module_info import ModuleInfo
 from ones_parser.xml_info_parser import parse_object_info
 from . import utils
 from .module_parser.parser import Parser as mParser
-from .parsed_data.BaseMetadataObject import fabric
-from .parsed_data.Configuration import Configuration, MetadataCollection
+from .parsed_data import Factory
+from .parsed_data.Configuration import Configuration
 
 MODULES = 1
 OBJECTS = 2
 
 
 class Parser:
+
+    __instance__: None
+
+    @staticmethod
+    def get_instance():
+        return Parser.__instance__
+
     """
     Выполняет разбор выгрузки исходников 1с.
     Получает информацию о:
@@ -22,8 +29,12 @@ class Parser:
        
     """
     def __init__(self, source_code_directory):
-        self.source_code_directory = source_code_directory
-        self.configuration = None
+
+        Parser.__instance__ = self
+
+        self.configuration = Configuration()
+        self.configuration.data_path = source_code_directory
+
         self.module_parser = None
 
     def read_structure(self):
@@ -34,32 +45,34 @@ class Parser:
         :return: Иерархическое описание структуры объектов конфигурации
         """
 
-        configuration = Configuration()
 
-        for item in utils.find_objects(self.source_code_directory):
-            collection = MetadataCollection(item['type'])
-            configuration.collections.append(collection)
+        for item in utils.find_objects(self.configuration.get_data_path()):
+            collection = Factory.meta_collection(item['type'])
+
+            if collection is None:
+                continue
+
+            collection.owner = self.configuration
+            self.configuration.collections.append(collection)
 
             for sub_item in item['sub_objects']:
-                obj = fabric(item['type'])
+                obj = Factory.object(item['type'], sub_item['name'])
 
                 if obj is None:
                     continue
+
                 collection.append(obj)
+                obj.owner = collection
 
-                obj.collectionName = item['type']
-                obj.name = sub_item['name']
-
-                data_path = os.path.join(utils.get_obj_directory(self.source_code_directory, obj), 'ext')
+                data_path = os.path.join(obj.get_data_path(), 'ext')
 
                 for file in utils.find_modules(data_path):
                     module_info = ModuleInfo()
-                    module_info.name = obj.collectionName + '.' + obj.name
-                    module_info.file_name = file
+                    module_info.owner = obj
+                    module_info.name = file[:-4]
                     obj.modules.append(module_info)
 
-        self.configuration = configuration
-        return configuration
+        return self.configuration
 
     def object_info(self, obj):
         """
@@ -94,11 +107,19 @@ class Parser:
 
         for collection in self.configuration.collections:
             for obj in collection:
+                for module in self.find_modules(obj):
+                    yield module
 
-                data_path = os.path.join(utils.get_obj_directory(self.source_code_directory, obj), 'ext')
-                for module_info in obj.modules:
-                    self.module_parser.parse_module(module_info, os.path.join(data_path, module_info.file_name))
-                    yield module_info
+    def read_modules(self, obj):
+
+        if self.module_parser is None:
+            self.module_parser = mParser()
+
+        data_path = os.path.join(utils.get_obj_directory(self.source_code_directory, obj), 'ext')
+
+        for module_info in obj.modules:
+            self.module_parser.parse_module(module_info, os.path.join(data_path, module_info.name+ '.bsl'))
+            yield module_info
 
     def get_file_name(self, obj):
         return utils.get_obj_file(self.source_code_directory, obj)
