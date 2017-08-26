@@ -1,7 +1,7 @@
-from .BaseMetadataObject import BaseMetadataObject
+from .BaseMetadataCls import BaseMetadataCls
 
 
-class Configuration(BaseMetadataObject):
+class Configuration(BaseMetadataCls):
 
     def __init__(self):
         super().__init__(self)

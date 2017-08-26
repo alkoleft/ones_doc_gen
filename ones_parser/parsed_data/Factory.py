@@ -1,4 +1,4 @@
-from . import BaseMetadataObject
+from . import BaseMetadataCls
 
 __table_types__ = None
 __all_types__ = None
@@ -62,12 +62,12 @@ def meta_collection(type):
     global __all_types__
 
     if type in __all_types__:
-        return BaseMetadataObject.MetadataCollection(type)
+        return BaseMetadataCls.MetadataCollection(type)
 
 def object(type, name):
     __init__()
     if type in __table_types__:
-        obj = BaseMetadataObject.TableMetaObject(name)
+        obj = BaseMetadataCls.TableMetaObject(name)
         obj.typeName = type
 
         return obj
