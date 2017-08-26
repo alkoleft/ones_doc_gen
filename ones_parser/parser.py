@@ -3,7 +3,6 @@ import os
 from ones_parser.module_parser.module_info import ModuleInfo
 from ones_parser.xml_info_parser import parse_object_info
 from . import utils
-from .module_parser.parser import Parser as mParser
 from .parsed_data import Factory
 from .parsed_data.Configuration import Configuration
 
@@ -12,6 +11,15 @@ OBJECTS = 2
 
 
 class Parser:
+    """
+    Выполняет разбор выгрузки исходников 1с.
+    Получает информацию о:
+
+       * Струкруре выгрузки
+       * Объектах метаданных
+       * Структуре модулей
+
+    """
 
     __instance__: None
 
@@ -19,23 +27,12 @@ class Parser:
     def get_instance():
         return Parser.__instance__
 
-    """
-    Выполняет разбор выгрузки исходников 1с.
-    Получает информацию о:
-    
-       * Струкруре выгрузки
-       * Объектах метаданных
-       * Структуре модулей
-       
-    """
     def __init__(self, source_code_directory):
 
         Parser.__instance__ = self
 
         self.configuration = Configuration()
         self.configuration.data_path = source_code_directory
-
-        self.module_parser = None
 
     def read_structure(self):
         """
@@ -82,7 +79,7 @@ class Parser:
         :return: Описание свойств объекта
         """
 
-        obj.properties = parse_object_info.parse(self.get_file_name(obj))
+        obj.properties = parse_object_info.parse(obj.get_data_path() + '.xml')
         return obj.properties
 
     def read_objects_info(self):
@@ -94,32 +91,3 @@ class Parser:
         for collection in self.configuration.collections:
             for item in collection:
                 self.object_info(item)
-
-    def read_modules_info_iter(self):
-        """
-        Читает информацию о модулях объекта
-
-        :return: Информация о модулях
-        """
-
-        if self.module_parser is None:
-            self.module_parser = mParser()
-
-        for collection in self.configuration.collections:
-            for obj in collection:
-                for module in self.find_modules(obj):
-                    yield module
-
-    def read_modules(self, obj):
-
-        if self.module_parser is None:
-            self.module_parser = mParser()
-
-        data_path = os.path.join(utils.get_obj_directory(self.source_code_directory, obj), 'ext')
-
-        for module_info in obj.modules:
-            self.module_parser.parse_module(module_info, os.path.join(data_path, module_info.name+ '.bsl'))
-            yield module_info
-
-    def get_file_name(self, obj):
-        return utils.get_obj_file(self.source_code_directory, obj)

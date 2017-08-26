@@ -39,6 +39,7 @@ def build(parser, output_path):
         for item in collection:
             build_item_docs(parser, item, os.path.join(output_type_path, '%s' % item.name))
 
+
 def build_main_index(cfg, output_path):
 
     with open(os.path.join(output_path, 'index.rst'), 'w', encoding='utf-8') as index_stream:
@@ -66,8 +67,11 @@ def build_item_docs(parser, item, output_path):
 
         rst_utils.write_toctree(stream, (m.name for m in item.modules), True)
 
-    for module in parser.read_modules(item):
+    item.read_modules()
+
+    for module in item.modules:
         write_module_info(output_path, module)
+
 
 def write_module_info(output, module):
 

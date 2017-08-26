@@ -19,14 +19,6 @@ def find_sub_objects(sub_directory):
     ]
 
 
-def get_obj_directory(source_code_directory, obj):
-    return os.path.join(source_code_directory, obj.typeName, obj.name)
-
-
-def get_obj_file(source_code_directory, obj):
-    return os.path.join(source_code_directory, obj.typeName, obj.name + '.xml')
-
-
 def find_modules(path):
     return [file for file in os.listdir(path) if file.endswith('.bsl')] \
         if os.path.exists(path) \
