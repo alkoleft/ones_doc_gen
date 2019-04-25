@@ -33,20 +33,7 @@ class TableMetaObject(BaseMetadataCls):
         self.properties = []
 
 
-class RefMetaObject(TableMetaObject):
 
-    def __init__(self, name=''):
-        super.__init__(self, name)
-
-
-
-class DocumentMeta(BaseMetadataCls):
-
-    def __init__(self, name):
-        super.__init__(self, name)
-
-        self.properties = []
-        self.tabularSections = []
 
 
 class MetadataCollection(list):

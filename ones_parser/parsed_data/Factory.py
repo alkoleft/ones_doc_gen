@@ -1,5 +1,6 @@
 from . import BaseMetadataCls
-
+from . import RefMeta
+from . import RegisterMeta
 __table_types__ = None
 __all_types__ = None
 
